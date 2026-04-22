@@ -58,5 +58,136 @@
         </div>
     </dialog>
 
+    <script>
+        // 1. DATA: 10 Questions
+        const questionsData = [
+            {
+                id: 1,
+                question: "What is the synonym of 'Happy'?",
+                options: ["Sad", "Joyful", "Angry", "Bored"],
+                answer: "Joyful"
+            },
+            {
+                id: 2,
+                question: "Which represents the past tense of 'Go'?",
+                options: ["Going", "Gone", "Went", "Goes"],
+                answer: "Went"
+            },
+            {
+                id: 3,
+                question: "Choose the correct spelling:",
+                options: ["Receive", "Recieve", "Receve", "Riceive"],
+                answer: "Receive"
+            },
+            {
+                id: 4,
+                question: "What is the antonym of 'Artificial'?",
+                options: ["Fake", "Natural", "Synthetic", "Man-made"],
+                answer: "Natural"
+            },
+            {
+                id: 5,
+                question: "He is afraid ___ spiders.",
+                options: ["of", "at", "in", "with"],
+                answer: "of"
+            },
+            {
+                id: 6,
+                question: "Identify the noun in this sentence: 'She runs fast.'",
+                options: ["She", "Runs", "Fast", "None"],
+                answer: "She"
+            },
+            {
+                id: 7,
+                question: "Plural form of 'Child' is:",
+                options: ["Childs", "Children", "Childrens", "Childes"],
+                answer: "Children"
+            },
+            {
+                id: 8,
+                question: "Which word is an adjective?",
+                options: ["Run", "Beauty", "Beautiful", "Quickly"],
+                answer: "Beautiful"
+            },
+            {
+                id: 9,
+                question: "I ___ waiting for you for two hours.",
+                options: ["am", "have been", "was", "had"],
+                answer: "have been"
+            },
+            {
+                id: 10,
+                question: "The sun rises ___ the East.",
+                options: ["on", "at", "in", "to"],
+                answer: "in"
+            }
+        ];
+
+        // 2. LOAD CONTENT
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get URL Param
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category') || 'General';
+            
+            // Set Titles
+            document.getElementById('category-title').innerText = category + " Quiz";
+            document.getElementById('quiz-header-title').innerText = category + " Quiz";
+
+            // Render Questions
+            const container = document.getElementById('questions-container');
+            
+            questionsData.forEach((q, index) => {
+                const questionHTML = `
+                    <div class="card bg-gray-50 border border-gray-200 p-4 rounded-lg">
+                        <h3 class="font-semibold text-lg mb-3"><span class="text-[#422AD5]">Q${index + 1}.</span> ${q.question}</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            ${q.options.map(option => `
+                                <label class="label cursor-pointer justify-start border border-gray-300 rounded-md p-2 hover:bg-gray-100 transition">
+                                    <input type="radio" name="question_${q.id}" value="${option}" class="radio radio-primary radio-sm mr-3" />
+                                    <span class="label-text text-base">${option}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += questionHTML;
+            });
+        });
+
+        // 3. SUBMIT & SCORE LOGIC
+        function submitQuiz() {
+            let score = 0;
+            const total = questionsData.length;
+
+            questionsData.forEach(q => {
+                // Get selected radio button for this question
+                const selected = document.querySelector(`input[name="question_${q.id}"]:checked`);
+                
+                if (selected) {
+                    if (selected.value === q.answer) {
+                        score++;
+                    }
+                }
+            });
+
+            // Calculate Percentage
+            const percentage = (score / total) * 100;
+
+            // Update Result Modal
+            document.getElementById('obtained-score').innerText = score;
+            document.getElementById('score-text').innerText = percentage + "%";
+            document.getElementById('score-circle').style.setProperty('--value', percentage);
+            
+            // Custom Feedback
+            const feedback = document.getElementById('feedback-text');
+            if(score === 10) feedback.innerText = "Perfect! You are a genius!";
+            else if(score >= 7) feedback.innerText = "Great job! Keep it up.";
+            else if(score >= 4) feedback.innerText = "Good try, but you can do better.";
+            else feedback.innerText = "Don't give up! Study more and try again.";
+
+            // Show Modal
+            document.getElementById('result_modal').showModal();
+        }
+    </script>
 </body>
 </html>
