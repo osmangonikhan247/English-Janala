@@ -3,9 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>English Janala | Learning Lessons</title>
+     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+     <script src="styles.css"></script>
 </head>
-<body>
-    
+<body class="bg-white text-black">
+    <!-- section 1 Login page  -->
+    <section id="loader_page" class="fixed top-0 left-0 w-full h-screen bg-white flex justify-center items-center flex-col z-50">
+        <div class="w-auto h-12 border-gray-300 border-t-gray-700 loading loading-dots loading-xl"></div>
+        <div class="font-bold text-[25px]">Welcome To</div>
+        <div class="flex items-center">English<img src="assets/logo.png" alt="" class="h-6 mx-1">জানালা</div>
+    </section>
+
+    <dialog id="openning_massage" class="modal">
+        <div id="openning_modal_container"></div>
+    </dialog>
+    <!-- section 1 login page done  -->
+
 </body>
 </html>
