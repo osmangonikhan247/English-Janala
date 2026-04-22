@@ -8,3 +8,6 @@
 - Text-to-speech pronunciation feature
 - English Quiz with score result
 - FAQ section
+
+## [Unreleased]
+- Improved README documentation
