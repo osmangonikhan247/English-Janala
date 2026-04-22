@@ -10,7 +10,7 @@
     <script src="https://kit.fontawesome.com/10a4595e8d.js" crossorigin="anonymous"></script>
     <title>English | জানালা</title>
      <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-     <script src="styles.css"></script>
+     <!-- <script src="styles.css"></script> -->
      <style>
         .hidden-section {
             display: none !important;
@@ -233,6 +233,23 @@
             });
             localStorage.setItem('activePage', sectionId);
         }
+        // INITIAL LOAD
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('loader_page').classList.add('hidden');
+                document.getElementById('web_page').classList.remove('hidden');
+                
+                const isLoggedIn = localStorage.getItem('isLoggedIn');
+                if (isLoggedIn === 'true') {
+                    document.getElementById('main-page').classList.remove('hidden');
+                    document.getElementById('login-page').classList.add('hidden');
+                    handleNavigation(localStorage.getItem('activePage') || 'learn_part');
+                } else {
+                    document.getElementById('login-page').classList.remove('hidden');
+                    document.getElementById('main-page').classList.add('hidden');
+                }
+            }, 2000);
+        });
  </script>
 </body>
 </html>
