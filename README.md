@@ -20,3 +20,9 @@ Learn vocabulary, pronunciation, and grammar through structured lessons.
 - `styles.css` – Custom styles
 - `lesson.js` – Fetches and displays vocabulary lessons
 - `login.js` – Handles login/logout
+
+## Technologies Used
+- HTML, CSS, JavaScript
+- Tailwind CSS + DaisyUI
+- Font Awesome icons
+- Programming Hero Vocabulary API
