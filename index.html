@@ -19,6 +19,39 @@
         <div id="openning_modal_container"></div>
     </dialog>
     <!-- section 1 login page done  -->
+    <script>
+        // LOGIN LOGIC
+        function performLogin() {
+            document.getElementById('login-page').classList.add('hidden');
+            document.getElementById('main-page').classList.remove('hidden');
+            localStorage.setItem('isLoggedIn', 'true');
+            handleNavigation('learn_part');
+        }
+        function performLogout() {
+            document.getElementById('login-page').classList.remove('hidden');
+            document.getElementById('main-page').classList.add('hidden');
+            localStorage.removeItem('isLoggedIn');
+        }
 
+        // NAVIGATION LOGIC
+        function handleNavigation(sectionId) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.add('hidden-section'));
+
+            const activeSection = document.getElementById(sectionId);
+            if(activeSection) activeSection.classList.remove('hidden-section');
+
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('bg-[#422AD5]', 'text-white');
+                btn.classList.add('text-[#422AD5]'); 
+                if(btn.getAttribute('data-target') === sectionId) {
+                    btn.classList.add('bg-[#422AD5]', 'text-white');
+                    btn.classList.remove('text-[#422AD5]');
+                }
+            });
+            localStorage.setItem('activePage', sectionId);
+        }
+ </script>
 </body>
 </html>
